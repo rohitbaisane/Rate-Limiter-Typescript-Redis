@@ -14,28 +14,27 @@ This project implements a **fixed-window rate limiting strategy** backed by Redi
 - ✅ Responds with **allow/block status only**
 - ✅ Perfect for **learning & demonstration**
 
-## 🧠 How It Works
 
 ## 🔌 API Endpoint
 
-GET /check
+`GET /check`
 
 Simulates a rate-limited request.
 
 ### ✅ Allowed Request
 
-```
+```json
 {
-"message": "Request is allowed"
+	"message": "Request is allowed"
 }
 ```
 
 ### ❌ Rate-Limited Request
 
-```
+```json
 {
-"message": "Too Many Requests",
-"retryAfterSeconds": 37
+    "message": "Too Many Requests",
+    "retryAfterSeconds": 37
 }
 ```
 
@@ -52,6 +51,23 @@ MAX_LIMIT=10
 ```
 
 PORT = port in which server runs.
-MAX_LIMIT = number of requests allowed in specific time frame.
+MAX_LIMIT = maximum number of requests allowed per IP within the time window.
 
 > Default window duration is 60 seconds.
+
+## How to Run project locally 
+
+```
+npm i 
+
+npm start
+```
+
+> Redis must be installed locally and running on 6379.
+
+## 🚀 Future Improvements
+
+- Sliding window rate limiting
+- Token bucket / leaky bucket algorithms
+- Redis Lua scripts for fully atomic execution
+- Middleware-based implementation
